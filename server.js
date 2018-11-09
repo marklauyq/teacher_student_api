@@ -50,7 +50,8 @@ app.all('*', (req,res)=>{
     })
 });
 
-const server = app.listen(3000, ()=> {
+
+const server = app.listen(4124, ()=> {
     util.log("Starting server");
 });
 

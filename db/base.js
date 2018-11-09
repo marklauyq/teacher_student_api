@@ -3,9 +3,9 @@ const util = require('../util/util');
 
 //todo: Change this to env variables
 const connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'mmarrk',
+    host     : process.env.MYSQL_HOST ? process.env.MYSQL_HOST: 'localhost',
+    user     : process.env.MYSQL_USER ? process.env.MYSQL_USER: 'mark',
+    password : process.env.MYSQL_PASS ? process.env.MYSQL_PASS: '',
     database : 'govtech'
 });
 

@@ -50,9 +50,12 @@ app.all('*', (req,res)=>{
     })
 });
 
+let argv = require('yargs').argv;
 
-const server = app.listen(4124, ()=> {
-    util.log("Starting server");
+let port = argv.p ? argv.p: 3000;
+
+const server = app.listen(port, ()=> {
+    util.log(`Starting server on port : ${port}`);
 });
 
 module.exports = server;

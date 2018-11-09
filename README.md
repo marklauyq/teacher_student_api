@@ -1,5 +1,5 @@
-#Teacher Student Admin API 
-
+Teacher Student Admin API 
+-
 This is a simple Teacher Student admin API that i am doing as an assignment given to me
 
 ---

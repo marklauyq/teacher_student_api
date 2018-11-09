@@ -1,6 +1,7 @@
-var connection = require('../base');
+var db = require('../base');
 
-
+var connection = db.connection;
+var status = db.status;
 
 /**
  * 
@@ -19,7 +20,7 @@ var returnCallback = function (callback, args) {
  * 
  * @param {function} callback 
  */
-const getTeachers = function(callback){
+var getTeachers = function(callback){
     connection.query("select * from teachers", function (){
         returnCallback(callback, arguments)
     });
@@ -30,28 +31,51 @@ const getTeachers = function(callback){
  * @param {object} data Contains all the details to be inserted
  * @param {function} callback callback function to retrieve results
  */
-const insertTeacher = function(data, callback){
+var insertTeacher = function(data, callback){
     var now = connection.escape(new Date());
-    connection.query("INSERT INTO students (`username`, `email, `created_at`)" +
-        "VALUES (?, ?, ?, ?) ", [data.username, data.email, now], function (){
+    connection.query("INSERT INTO teachers (`username`, `email, `created_at`)" +
+        "VALUES ( ?, ?, ?) ", [data.username, data.email, now], function (){
         returnCallback(callback, arguments)
     });
 }
 
-module.exports.getTeachers = function (callback){
-    connection.query("select * from teachers", (error, results, fields) => {
-        callback(error, results, fields)
-     });
+/**
+ * 
+ * @param {number} id 
+ * @param {function} callback 
+ */
+var getTeacher = function (id, callback){
+    connection.query("select * from teachers where id = ? ", [id], function (){
+        returnCallback(callback, arguments)
+    });
 }
 
-
-
-module.exports.insertTeacher = function(callback){
-
+/**
+ * To retrieve the teacher based on the email address	
+ * @param {string} email The email address to search
+ * @param {function} callback the call back function to return the resut
+ */
+var getTeacherByEmail = function (email, callback){
+    connection.query("select * from teachers where email = ? ", [email],function (){
+        returnCallback(callback, arguments)
+    });
 }
 
+/**
+ * To delete a teacher by ID 
+ * @param {number} id The id of the teacher
+ * @param {function} callback Callback function to return the results
+ */
+var deleteTeacher = function(id, callback){
+    connection.query("delete from students where id = ?", [id], function (){
+        returnCallback(callback, arguments)
+    });
+}
 
-module.exports.getTeachers = function(callback){}
-
-module.exports.deleteTeachers = function(callback){}
-
+module.exports = {
+    getTeachers,
+    insertTeacher,
+    getTeacher,
+    getTeacherByEmail,
+    deleteTeacher,
+};

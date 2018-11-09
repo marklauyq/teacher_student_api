@@ -4,13 +4,31 @@
 
 
 var express = require('express');
+var map = require('../db/models/map_teacher_students');
 var router = express.Router();
 
+
 /**
- * this is the student routes
+ * A teacher can register multiple students. 
  */
-router.post('/register', function(req, res) {
-    res.send("test");
+router.post('/register', function (req, res) {
+    //get the post data
+    let post = req.body;
+
+    let teacher = post.teacher
+    let students = post.students;
+
+    try {
+        map.mapTeacherToStudent(teacher, students, (result) => {
+
+            
+            res.send(result);
+        });
+    } catch (error) {
+        res.status(400).send({
+            message:error.message
+        });
+    }
 });
 
 module.exports = router;

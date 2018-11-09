@@ -29,13 +29,30 @@ create table students
 /*This is for the test cases*/
 INSERT INTO govtech.students (id, username, email, is_suspended, created_at) VALUES (1, 'marklauyq', 'mark.lau@chope.co', 0, '2018-11-07 15:05:05');
 
-CREATE TABLE map_teacher_students
+create table map_teacher_students
 (
-    id int PRIMARY KEY AUTO_INCREMENT,
-    created_at datetime,
-    teacher_id int,
-    student_id int,
-    CONSTRAINT map_teacher_students_teachers_id_fk FOREIGN KEY (teacher_id) REFERENCES teachers (id) ON DELETE CASCADE,
-    CONSTRAINT map_teacher_students_students_id_fk FOREIGN KEY (student_id) REFERENCES students (id) ON DELETE CASCADE
-);
+	id int auto_increment
+		primary key,
+	created_at datetime null,
+	teacher_id int null,
+	student_id int null,
+    
+	constraint map_teacher_students_teacher_id_student_id_pk
+		unique (teacher_id, student_id),
+
+	constraint map_teacher_students_teachers_id_fk
+		foreign key (teacher_id) references teachers (id)
+			on delete cascade,
+
+	constraint map_teacher_students_students_id_fk
+		foreign key (student_id) references students (id)
+			on delete cascade
+)
+;
+
+create index map_teacher_students_students_id_fk
+	on map_teacher_students (student_id)
+;
+
+
 

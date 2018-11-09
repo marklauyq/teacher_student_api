@@ -4,7 +4,7 @@
 
 
 var express = require('express');
-var map = require('../db/models/map_teacher_students');
+var map = require('../db/service/map');
 var router = express.Router();
 
 
@@ -18,17 +18,33 @@ router.post('/register', function (req, res) {
     let teacher = post.teacher
     let students = post.students;
 
-    try {
-        map.mapTeacherToStudent(teacher, students, (result) => {
 
-            
-            res.send(result);
-        });
-    } catch (error) {
+    map.mapTeacherToStudent(teacher, students, (result) => {
+
+
+        res.send(result);
+    }, function (error) {
         res.status(400).send({
-            message:error.message
+            message: error.message
         });
-    }
+    });
+});
+
+
+router.get('/commonstudents', function(req, res){
+
+    let teacher = req.query.teacher;
+
+    if(teacher === undefined)
+        res.status(400).send({message:"Missing query parameter: teacher"});
+
+    map.getStudentsByTeacher(teacher, (result)=>{
+        res.send(result);
+    },(error)=>{
+        res.status(400).send({message:error});
+    });    
+    
+
 });
 
 module.exports = router;

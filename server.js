@@ -1,9 +1,12 @@
 const express = require('express');
-
+var bodyParser = require('body-parser');
 const util = require('./util/util.js');
 
 var app = new express();
 global.app_dir = __dirname;
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 
 //middlewares

@@ -1,0 +1,23 @@
+{
+  "name": "govtech-test",
+  "version": "1.0.0",
+  "description": "This is the test for the gov tech assignment given to me",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha tests/*.test.js ",
+    "play": "nodemon playground/sandbox.js",
+    "test-watch": "nodemon --exec \"npm test\"",
+    "start": "node server.js"
+  },
+  "author": "Mark Lau",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "expect": "^1.20.2",
+    "mocha": "^5.2.0",
+    "rewire": "^4.0.1",
+    "supertest": "^3.3.0"
+  }
+}

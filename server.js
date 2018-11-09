@@ -24,7 +24,6 @@ app.use((req, res, next)=>{
     next();
 });
 
-
 /**
  * I want to be able to log every outgoing response
  */
@@ -34,7 +33,7 @@ app.use((req, res , next)=>{
     res.send = function(data){
         util.log("Loggin Response data" ,data); 
         oldSend.apply(res, arguments);
-    }
+    };
 
     next();
 });
@@ -45,7 +44,11 @@ app.get('/', (req, res) => {
 
 require('./routes/routes')(app);
 
-
+app.all('*', (req,res)=>{
+    res.status(404).send({
+        message:"Method and/or Route not found"
+    })
+});
 
 const server = app.listen(3000, ()=> {
     util.log("Starting server");

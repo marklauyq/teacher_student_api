@@ -112,7 +112,7 @@ const mapTeacherToStudent = function (teacher, students, callback, errorCallback
                         reject(error);
                         return;
                     }
-                    resolve(result[0].insertId);
+                    resolve(result.insertId);
                 });
             }))
         });
@@ -121,7 +121,7 @@ const mapTeacherToStudent = function (teacher, students, callback, errorCallback
 
     }, handleError).then(function () {
         callback({
-            message: "Successfully added students to teacher"
+            message: "Successfully added student(s) to teacher"
         });
     }).catch(function (error) {
         errorCallback(error)

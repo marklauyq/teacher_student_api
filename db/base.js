@@ -1,8 +1,8 @@
 const mysql = require('mysql');
-const util = require('util');
+const util = require('../util/util');
 
 //todo: Change this to env variables
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : 'mmarrk',
@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
 });
 
 
-var status = true;
+let status = true;
 connection.connect((err) => {
     if (err) {
         status = false;
@@ -20,7 +20,6 @@ connection.connect((err) => {
     
       util.log('connected as id ' + connection.threadId);
 });
-
 
 module.exports.connection = connection;
 module.exports.status = status;

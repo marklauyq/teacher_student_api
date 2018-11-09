@@ -95,7 +95,7 @@ describe("Student test suite", () => {
                     done();
                 });
             })
-        })
+        });
 
         
         it("should unsuspend the student correctly", (done) => {
@@ -108,7 +108,7 @@ describe("Student test suite", () => {
                     done();
                 });
             })
-        })
+        });
 
 
         it('should be able to get student by email', (done) => {

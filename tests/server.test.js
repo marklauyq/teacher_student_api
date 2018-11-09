@@ -16,8 +16,11 @@ it('should be able to retrieve the home api page', (done) => {
 
 
 it('should be able to register a one student to a teacher' ,(done) =>{
-    done();
-}); 
+    request(app)
+        .get('/register')
+        .expect(200)
+        .end(done);
+});
 
 it('should be able to register a group of students to a teacher' ,(done) =>{
     done();
